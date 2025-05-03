@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <style>
+        .container{
+            width: 100%;
+            
+            background-color: brown;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .main{
+            width: 20%;
+            height: 25vh;
+            background-color: blue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .overlay{
+            width: 100%;
+            height: 100vh;
+            background-color: blue;
+            position: fixed;
+            top: 0;
+            right: 0;
+            transform: scale(0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-transform: uppercase;
+
+
+        }
+        div{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+    </div>
+
+    <div class="overlay"></div>
+    <script>
+        var container = document.querySelector(".container");
+
+        var overlay =document.querySelector(".overlay")
+        let message = ['wel done','nice','good','excellend']
+        for(i=1; i<=20; i++){
+            var asas =document.createElement("div")
+            asas.classList.add("main")
+
+            container.appendChild(asas)
+
+            var r = parseInt(Math.random()*256).toString(16).padStart(2,"0")
+            var g = parseInt(Math.random()*256).toString(16).padStart(2,"0")
+
+            var b = parseInt(Math.random()*256).toString(16).padStart(2,"0")
+               code = "#" + r+g+b ;
+               asas.innerText = code
+               asas.style.background = code
+               asas.addEventListener(
+                "click",
+                function (e) {
+                    navigator.clipboard.writeText(e.target.innerText )
+                    overlay.innerText = message[parseInt(Math.random()*message.length)]
+                    overlay.style.transform = "scale(1)"
+                    overlay.style.background = e.target.innerText
+
+                  setTimeout (
+                    function (){
+                        overlay.style.transform = "scale(0)"
+                    },1000
+                )
+
+                }
+               )
+
+        }
+    </script>
+</body>
+</html>
